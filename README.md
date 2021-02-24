@@ -18,3 +18,7 @@ https://youtu.be/wtHcrOoWQc0
 
 To install this plugin run openmod install F.RestoreInventory
 
+# Workshop Mod
+
+https://steamcommunity.com/sharedfiles/filedetails/?id=2401649845
+

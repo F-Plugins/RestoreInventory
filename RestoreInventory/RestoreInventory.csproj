@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
+    <PackageTags>openmod openmod-plugin unturned</PackageTags>
+    <RootNamespace>RestoreInventory</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateNugetPackage>true</GenerateNugetPackage>
+    <Product>RestoreInventory</Product>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>nullable</WarningsAsErrors>
+    <NoWarn>$(NoWarn);NU1701;NU1702;CS0436</NoWarn>
+    <LangVersion>9.0</LangVersion>
+    <Version>1.0.0</Version>
+    <InformationalVersion>1.0.0</InformationalVersion>
+    <PackageVersion>1.0.0</PackageVersion>
+  </PropertyGroup>
+
+	<ItemGroup>
+    <PackageReference Include="OpenMod.Unturned" Version="3.0.13+c16f123" />
+    <PackageReference Include="Legacy2CPSWorkaround" Version="1.0.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net461" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <Target Name="ChangeAliasesOfNugetRefs" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
+    <ItemGroup>
+    </ItemGroup>
+  </Target>
+
+	<PropertyGroup>
+		<PackageId>F.RestoreInventory</PackageId>
+		<!-- must be unique, should be same as your plugin ID -->
+		<PackageDescription>This plugin allows you to restore players inventories after die with ui and commands</PackageDescription>
+		<PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
+		<!-- see https://spdx.org/licenses/ -->
+		<PackageAuthor>Feli</PackageAuthor>
+		<PackageTags>openmod openmod-plugin unturned</PackageTags>
+		<!-- XXX can be unturned, unityengine or universal depending on your plugin -->
+		<Version>1.0.0</Version>
+		<!-- Your plugins version. Must be semversion, see https://semver.org/ -->
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateNugetPackage>true</GenerateNugetPackage>
+	</PropertyGroup>
+
+</Project>

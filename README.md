@@ -12,7 +12,7 @@ FPlugins Discord: https://discord.gg/4FF2548
 
 # Preview
 
-![Youtube Preview](https://youtu.be/wtHcrOoWQc0)
+https://youtu.be/wtHcrOoWQc0
 
 # HowToInstall
 

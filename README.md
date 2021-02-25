@@ -16,7 +16,7 @@ https://youtu.be/wtHcrOoWQc0
 
 # HowToInstall
 
-To install this plugin run openmod install F.RestoreInventory
+To install this plugin run openmod install F.RestoreInventory or download the dll here: https://github.com/F-Plugins/RestoreInventory/releases
 
 # Workshop Mod
 

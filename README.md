@@ -1,5 +1,5 @@
 # RestoreInventory
-![Discord](https://img.shields.io/discord/742861338233274418?label=Discord&logo=Discord) ![NugetDownloads](https://img.shields.io/nuget/dt/F.RestoreInventory?label=Nuget%20Downloads)
+![Discord](https://img.shields.io/discord/742861338233274418?label=Discord&logo=Discord) ![NugetDownloads](https://img.shields.io/nuget/dt/F.RestoreInventory?label=Nuget%20Downloads) [![Github All Releases](https://img.shields.io/github/downloads/F-Plugins/RestoreInventory/total?label=Github%20Downloads)]()
 
 This plugin allows you to restore players inventories after die with ui and commands
 

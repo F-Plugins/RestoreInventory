@@ -3,7 +3,7 @@
 
 This plugin allows you to restore players inventories after die with ui and commands
 
-You can choose to restore the last 3 invetories of a player
+You can choose to restore the last 3 inventories of a player
 
 
 If you need help join the discord and write in the support channel !

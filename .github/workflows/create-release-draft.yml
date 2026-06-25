@@ -1,0 +1,66 @@
+name: Create Release Draft
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Plugin Version"
+        required: true
+
+jobs:
+  build:
+    name: GitHub Release v${{ github.event.inputs.version }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Update versions
+        run: 'sed -i "s#<Version>0.0.0</Version>#<Version>${{ github.event.inputs.version }}</Version>#" "./RestoreInventory/RestoreInventory.csproj"'
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Install zip
+        run: sudo apt-get install zip
+
+      - name: Zip Rocket release artifacts
+        run: |
+          mkdir -p ./Rocket/Plugins ./Rocket/Libraries
+          cd "./RestoreInventory/bin/Release/net48"
+          mv RestoreInventory.dll ../../../../Rocket/Plugins
+          mv LiteDB.dll ../../../../Rocket/Libraries
+          mv Feli.Rocket.Utils.dll ../../../../Rocket/Libraries
+          cd ../../../../Rocket
+          zip -qr ./Release.zip *
+          cd ..
+        shell: bash
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          release_name: "RestoreInventory Release v${{ github.event.inputs.version }}"
+          draft: true
+          prerelease: false
+
+      - name: Upload Rocket release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Rocket/Release.zip
+          asset_name: "RestoreInventory-RocketMod-v${{ github.event.inputs.version }}.zip"
+          asset_content_type: application/zip

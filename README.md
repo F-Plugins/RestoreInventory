@@ -18,9 +18,9 @@ Inventories are stored locally with LiteDB in the plugin directory.
 
 ## Commands
 
-### `/restoreinventorylist`
+### `/restoreinventorylist <player>`
 
-Lists your saved inventories from newest to oldest.
+Lists a player's saved inventories from newest to oldest.
 
 Aliases:
 
@@ -33,9 +33,9 @@ Each entry shows:
 - item count
 - saved date/time
 
-### `/restoreinventory <number>`
+### `/restoreinventory <player> <number>`
 
-Restores the saved inventory matching the number shown by `/restoreinventorylist`.
+Restores the saved inventory matching the number shown by `/restoreinventorylist <player>` to the target player.
 
 Alias:
 
@@ -44,7 +44,7 @@ Alias:
 Example:
 
 ```text
-/restoreinventory 1
+/restoreinventory Feli 1
 ```
 
 ## Permissions

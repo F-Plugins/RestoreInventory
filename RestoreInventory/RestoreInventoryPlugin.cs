@@ -60,12 +60,14 @@ public class RestoreInventoryPlugin : RocketPlugin<RestoreInventoryPluginConfigu
 
     public override TranslationList DefaultTranslations => new()
     {
-        {"RestoreInventoryListEmpty", "You don't have any saved inventories." },
-        {"RestoreInventoryListHeader", "Your saved inventories:" },
+        {"RestoreInventoryListSyntax", "Correct usage: /restoreinventorylist <player>" },
+        {"RestoreInventoryPlayerNotFound", "Could not find player {0}." },
+        {"RestoreInventoryListEmpty", "{0} doesn't have any saved inventories." },
+        {"RestoreInventoryListHeader", "Saved inventories for {0}:" },
         {"RestoreInventoryListItem", "{0}. {1} items - {2}" },
-        {"RestoreInventoryRestoreSyntax", "Correct usage: /restoreinventory <number>" },
+        {"RestoreInventoryRestoreSyntax", "Correct usage: /restoreinventory <player> <number>" },
         {"RestoreInventoryInvalidNumber", "Invalid inventory number." },
-        {"RestoreInventoryNotFound", "Could not find inventory #{0}." },
-        {"RestoreInventoryRestored", "Successfully restored inventory #{0}. Items that did not fit were dropped." }
+        {"RestoreInventoryNotFound", "Could not find inventory #{0} for {1}." },
+        {"RestoreInventoryRestored", "Successfully restored inventory #{0} to {1}. Items that did not fit were dropped." }
     };
 }

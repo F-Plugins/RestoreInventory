@@ -12,13 +12,19 @@ public class RestoreInventoryRestoreCommand : IRocketCommand
 {
     public void Execute(IRocketPlayer caller, string[] command)
     {
-        if (command.Length == 0 || !int.TryParse(command[0], out var inventoryNumber) || inventoryNumber < 1)
+        if (command.Length < 2 || !int.TryParse(command[1], out var inventoryNumber) || inventoryNumber < 1)
         {
             caller.SendLocalizedMessage("RestoreInventoryRestoreSyntax", Color.red);
             return;
         }
 
-        var player = (UnturnedPlayer)caller;
+        var player = UnturnedPlayer.FromName(command[0]);
+
+        if (player is null)
+        {
+            caller.SendLocalizedMessage("RestoreInventoryPlayerNotFound", Color.red, command[0]);
+            return;
+        }
 
         ThreadTool.RunOnThreadPool(async () =>
         {
@@ -26,7 +32,7 @@ public class RestoreInventoryRestoreCommand : IRocketCommand
 
             if (inventories.Length == 0)
             {
-                player.SendLocalizedMessage("RestoreInventoryListEmpty", Color.red);
+                caller.SendLocalizedMessage("RestoreInventoryListEmpty", Color.red, player.DisplayName);
                 return;
             }
 
@@ -34,25 +40,25 @@ public class RestoreInventoryRestoreCommand : IRocketCommand
 
             if (inventory is null)
             {
-                player.SendLocalizedMessage("RestoreInventoryNotFound", Color.red, inventoryNumber);
+                caller.SendLocalizedMessage("RestoreInventoryNotFound", Color.red, inventoryNumber, player.DisplayName);
                 return;
             }
 
             ThreadTool.QueueOnMainThread(() =>
             {
                 inventory.Restore(player.Player);
-                player.SendLocalizedMessage("RestoreInventoryRestored", Color.green, inventoryNumber);
+                caller.SendLocalizedMessage("RestoreInventoryRestored", Color.green, inventoryNumber, player.DisplayName);
             });
         });
     }
 
-    public AllowedCaller AllowedCaller => AllowedCaller.Player;
+    public AllowedCaller AllowedCaller => AllowedCaller.Both;
 
     public string Name => "restoreinventory";
 
-    public string Help => "Restore a saved inventory";
+    public string Help => "Restore a saved inventory to a player";
 
-    public string Syntax => "<number>";
+    public string Syntax => "<player> <number>";
 
     public List<string> Aliases => new() { "ri" };
 

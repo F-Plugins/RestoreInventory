@@ -12,7 +12,19 @@ public class RestoreInventoryListCommand : IRocketCommand
 {
     public void Execute(IRocketPlayer caller, string[] command)
     {
-        var player = (UnturnedPlayer)caller;
+        if (command.Length == 0)
+        {
+            caller.SendLocalizedMessage("RestoreInventoryListSyntax", Color.red);
+            return;
+        }
+
+        var player = UnturnedPlayer.FromName(command[0]);
+
+        if (player is null)
+        {
+            caller.SendLocalizedMessage("RestoreInventoryPlayerNotFound", Color.red, command[0]);
+            return;
+        }
 
         ThreadTool.RunOnThreadPool(async () =>
         {
@@ -22,28 +34,28 @@ public class RestoreInventoryListCommand : IRocketCommand
             {
                 if (inventories.Length == 0)
                 {
-                    player.SendLocalizedMessage("RestoreInventoryListEmpty", Color.red);
+                    caller.SendLocalizedMessage("RestoreInventoryListEmpty", Color.red, player.DisplayName);
                     return;
                 }
 
-                player.SendLocalizedMessage("RestoreInventoryListHeader", Color.cyan);
+                caller.SendLocalizedMessage("RestoreInventoryListHeader", Color.cyan, player.DisplayName);
 
                 for (var i = 0; i < inventories.Length; i++)
                 {
                     var inventory = inventories[i];
-                    player.SendLocalizedMessage("RestoreInventoryListItem", Color.cyan, i + 1, inventory.ItemCount, inventory.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss"));
+                    caller.SendLocalizedMessage("RestoreInventoryListItem", Color.cyan, i + 1, inventory.ItemCount, inventory.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss"));
                 }
             });
         });
     }
 
-    public AllowedCaller AllowedCaller => AllowedCaller.Player;
+    public AllowedCaller AllowedCaller => AllowedCaller.Both;
 
     public string Name => "restoreinventorylist";
 
-    public string Help => "List your saved inventories";
+    public string Help => "List a player's saved inventories";
 
-    public string Syntax => string.Empty;
+    public string Syntax => "<player>";
 
     public List<string> Aliases => new() { "ril", "rinventories" };
 

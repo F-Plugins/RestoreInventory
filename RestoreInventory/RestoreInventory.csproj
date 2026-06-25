@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<RootNamespace>Feli.RestoreInventory</RootNamespace>
+		<LangVersion>11</LangVersion>
+		<Nullable>disable</Nullable>
+		<Version>0.0.0</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Feli.Rocket.Utils" Version="1.0.0" />
+		<PackageReference Include="LiteDB" Version="5.0.17" />
+	</ItemGroup>
+
+</Project>
